@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel – Variação em Tempo Real</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#020617;color:#e5e7eb;padding:20px}
+    h2{color:#38bdf8;margin-top:30px;border-bottom:1px solid #334155;padding-bottom:6px}
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{padding:10px 12px;border-bottom:1px solid #1e293b;font-size:16px}
+    th{text-align:left;color:#94a3b8}
+    td{text-align:right}
+    td:first-child{text-align:left}
+    .pos{color:#22c55e;font-weight:700}
+    .neg{color:#ef4444;font-weight:700}
+    .neu{color:#94a3b8}
+    .blink{animation:blink 0.6s}
+    @keyframes blink{0%{opacity:0.3}100%{opacity:1}}
+  </style>
+</head>
+<body>
+
+<h2>FUTUROS – VARIAÇÃO (%)</h2>
+<table id="painel">
+  <tr><th>Ativo</th><th>Variação</th></tr>
+  <tr><td>Dow Jones Fut</td><td id="dow" class="neu">0.00%</td></tr>
+  <tr><td>S&P 500 Fut</td><td id="sp" class="neu">0.00%</td></tr>
+  <tr><td>Nasdaq Fut</td><td id="nas" class="neu">0.00%</td></tr>
+  <tr><td>E. Stoxx 50 Fut</td><td id="stoxx" class="pos">+0.42%</td></tr>
+  <tr><td>China A50 Fut</td><td id="a50" class="pos">+0.16%</td></tr>
+  <tr><td>Ibovespa Fut</td><td id="ibov" class="pos">+0.17%</td></tr>
+</table>
+
+<script>
+// SIMULA atualização em tempo real (substitua por API real)
+const ativos = ["dow","sp","nas","stoxx","a50","ibov"];
+
+function atualizar(){
+  ativos.forEach(id => {
+    const el = document.getElementById(id);
+    let variacao = (Math.random()*1.2 - 0.6).toFixed(2); // -0.6% a +0.6%
+    let classe = variacao > 0 ? 'pos' : variacao < 0 ? 'neg' : 'neu';
+    el.className = classe + ' blink';
+    el.innerText = (variacao > 0 ? '+' : '') + variacao + '%';
+  });
+}
+
+setInterval(atualizar, 5000); // atualiza a cada 5 segundos
+</script>
+
+</body>
+</html>
